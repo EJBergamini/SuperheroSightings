@@ -1,0 +1,193 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 27, 2017, 10:21:12 AM
+    Author     : EJB Laptop
+*/
+
+#spacingDiv {
+    height: 20px;
+    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
+/*    border: 5px solid black;*/
+}
+
+#displayFirst10Sightings {
+    border: 5px solid black;
+    height: 450px;
+    width: 100%;
+}
+
+#heading {
+    text-align: center;
+    margin: 0 auto;
+    float: none;
+    padding: 10px;
+}
+
+.jumbotron {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    height: 250px;
+}
+
+#jumboTitle {
+    text-align: center;
+}
+
+#test {
+    border: 5px solid black;
+    height: 100px;
+}
+
+#displayDetails {
+    border: 5px solid black;
+    height: 450px;
+    overflow: auto;
+}
+
+#displaySightings {
+    border: 5px solid black;
+    height: 450px;
+    overflow: scroll;
+}
+
+#displayBuffer {
+    height: 450px;
+}
+
+.tabs {
+    width: 200px;
+    text-align: center;
+}
+
+#createNewButton {
+    width: 200px;
+}
+
+#buttonHouse {
+    text-align: center;
+}
+
+#buttonSpaceDiv {
+    padding: 10px;
+}
+
+.displaySizingRows {
+    width: 100%;
+}
+
+.displayRowsRight {
+    text-align: right;
+}
+
+#fullRow {
+    width: 100%;
+}
+
+.detailHeader {
+    width: 100%;
+}
+
+#sightingDisplayBox {
+    display: hide;
+}
+
+#textInput {
+    width: 250px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#centerList {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#chooseSuper {
+    display: table-cell;
+    vertical-align: middle;
+    overflow: scroll;
+    width: 250px;
+}
+
+#locations {
+    text-align: center;
+    width: 250px;
+}
+
+#comment {
+    width: 250px;
+}
+
+#commentLabel {
+    float: left;
+}
+
+#buttonSpacing1 {
+    margin: 5px;
+}
+
+#buttonSpacing2 {
+    margin: 5px;
+}
+
+#editHeader {
+    text-align: center;
+}
+
+.editInput {
+    width: 250px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#buttonSpacing3 {
+    margin: 5px;
+}
+
+#buttonSpacing4 {
+    margin: 5px;
+}
+
+#buttons {
+    text-align: center;
+}
+
+#pickSupers{
+    text-align: center;
+}
+
+#labelPad {
+    padding-left: 50px;
+}
+
+#location {
+    width: 250px;
+    text-align: center;
+}
+
+#date {
+    text-align: center;
+}
+
+#time {
+    text-align: center;
+}
+
+body {
+    height: 2500px;
+}
+
+#paginationContainer {
+    height: 30px;
+    border: 5px solid black;
+}
+
+#paginationDiv {
+    height: 30px;
+}

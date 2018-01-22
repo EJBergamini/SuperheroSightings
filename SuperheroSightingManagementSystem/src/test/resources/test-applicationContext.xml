@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+              xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"> 
+
+    <!-- Bean definitions go here -->
+    
+    <tx:annotation-driven />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+          <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+          <property name = "url" value ="jdbc:mysql://localhost:3306/superherosightingmanagementsystemdatabasetest"/>
+          <property name="username" value="root" />
+          <property name="password" value="5077" />
+          <property name="initialSize" value="5" />
+          <property name="maxTotal" value="10" />
+    </bean>
+
+    <bean id = "transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- DAO BEANS -->
+
+    <bean id="addressDao" class="SuperheroSighting.Dao.AddressDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="contactDao" class="SuperheroSighting.Dao.ContactDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="locationDao" class="SuperheroSighting.Dao.LocationDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="moralityTypeDao" class="SuperheroSighting.Dao.MoralityTypeDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="organizationDao" class="SuperheroSighting.Dao.OrganizationDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="organizationPersonDao" class="SuperheroSighting.Dao.OrganizationPersonDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="personDao" class="SuperheroSighting.Dao.PersonDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="powerDao" class="SuperheroSighting.Dao.PowerDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="sightingDao" class="SuperheroSighting.Dao.SightingDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="sightingSuperpersonDao" class="SuperheroSighting.Dao.SightingSuperpersonDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="superpersonDao" class="SuperheroSighting.Dao.SuperpersonDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="superpersonPowerDao" class="SuperheroSighting.Dao.SuperpersonPowerDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="userDao" class="SuperheroSighting.Dao.UserDaoImplementation">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+    
+    <bean id="dbInjection" class="SuperheroSightingDaoTest.TestingDataInjector">       
+        <property name="jdbcTemplate" ref="jdbcTemplate" />        
+    </bean>
+
+    <!-- Service Beans -->
+
+    <bean id="addressService" class="SuperheroSighting.Service.AddressService">
+        <constructor-arg ref="addressDao"/>
+        <property name="contactService" ref="contactService"/>
+        <property name="locationService" ref="locationService"/>
+        <property name="organizationService" ref="organizationService"/>
+    </bean>
+
+    <bean id="powerService" class="SuperheroSighting.Service.PowerService">
+        <constructor-arg ref="powerDao"/>
+        <property name="superpersonService" ref="superpersonService"/>
+    </bean>
+    
+    <bean id="moralityTypeService" class="SuperheroSighting.Service.MoralityTypeService">
+        <constructor-arg ref="moralityTypeDao"/>
+        <property name="organizationService" ref="organizationService"/>
+        <property name="superpersonService" ref="superpersonService"/>
+    </bean>
+
+    <bean id="personService" class="SuperheroSighting.Service.PersonService">
+        <constructor-arg ref="personDao"/>
+        <property name="superpersonService" ref="superpersonService"/>
+        <property name="contactService" ref="contactService"/>
+        <property name="userService" ref="userService"/>
+        <property name="organizationPersonService" ref="organizationPersonService"/>    
+        <property name="organizationService" ref="organizationService"/>
+    </bean>
+
+    <bean id="contactService" class="SuperheroSighting.Service.ContactService">
+        <constructor-arg ref="contactDao"/>
+        <property name="addressService" ref="addressService"/>
+        <property name="personService" ref="personService"/>
+        <property name="organizationService" ref="organizationService"/>
+    </bean>
+
+    <bean id="superpersonService" class="SuperheroSighting.Service.SuperpersonService">
+        <constructor-arg ref="superpersonDao"/>
+        <property name="superpersonPowerService" ref="superpersonPowerService"/>
+        <property name="sightingSuperpersonService" ref="sightingSuperpersonService"/> 
+        <property name="moralityTypeService" ref="moralityTypeService"/>
+        <property name="personService" ref="personService"/>
+        <property name="locationService" ref="locationService"/>
+        <property name="sightingService" ref="sightingService"/>
+        <property name="powerService" ref="powerService"/>
+        <property name="organizationService" ref="organizationService"/>             
+    </bean>
+
+    <bean id="userService" class="SuperheroSighting.Service.UserService">
+        <constructor-arg ref="userDao"/>
+        <property name="sightingService" ref="sightingService"/>
+        <property name="personService" ref="personService"/>
+    </bean>
+
+    <bean id="locationService" class="SuperheroSighting.Service.LocationService">
+        <constructor-arg ref="locationDao"/>
+        <property name="sightingService" ref="sightingService"/>
+        <property name="superpersonService" ref="superpersonService"/>
+        <property name="addressService" ref="addressService"/>
+    </bean>
+    
+
+    <bean id="superpersonPowerService" class="SuperheroSighting.Service.SuperpersonPowerService">
+        <constructor-arg ref="superpersonPowerDao"/>
+        <property name="superpersonService" ref="superpersonService"/>
+        <property name="powerService" ref="powerService"/>
+    </bean>
+
+    <bean id="organizationService" class="SuperheroSighting.Service.OrganizationService">
+        <constructor-arg ref="organizationDao"/>       
+        <property name="moralityTypeService" ref="moralityTypeService"/>
+        <property name="organizationPersonService" ref="organizationPersonService"/>
+        <property name="personService" ref="personService"/>
+        <property name="superpersonService" ref="superpersonService"/>
+        <property name="contactService" ref="contactService"/>
+        <property name="addressService" ref="addressService"/>       
+    </bean>
+
+    <bean id="organizationPersonService" class="SuperheroSighting.Service.OrganizationPersonService">
+        <constructor-arg ref="organizationPersonDao"/>
+        <property name="personService" ref="personService"/>
+        <property name="organizationService" ref="organizationService"/>
+    </bean>
+
+    <bean id="sightingSuperpersonService" class="SuperheroSighting.Service.SightingSuperpersonService">
+        <constructor-arg ref="sightingSuperpersonDao"/>
+        <property name="superpersonService" ref="superpersonService"/>
+        <property name="sightingService" ref="sightingService"/>
+    </bean>
+
+    <bean id="sightingService" class="SuperheroSighting.Service.SightingService">
+        <constructor-arg ref="sightingDao"/>
+        <property name="locationService" ref="locationService"/>
+        <property name="sightingSuperpersonService" ref="sightingSuperpersonService"/>
+        <property name="personService" ref="personService"/>
+        <property name="superpersonService" ref="superpersonService"/>
+        <property name="addressService" ref="addressService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+    
+</beans>
